@@ -61,7 +61,7 @@
                     const start = performance.now();
                     ff.onload = () => {
                         const timing = performance.now() - start;
-                        if (timing < 1000 || token.startsWith('f')) {
+                        if (timing < 1000 || (token + CHAR_LIST[c]).startsWith('f')) {
                             // not found
                             c += 1;
                             if (c === CHAR_LIST.length) {
