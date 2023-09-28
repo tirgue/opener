@@ -13,8 +13,42 @@
         const ALPHABET_UPPER = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
         const ALPHABET_LOWER = ALPHABET_UPPER.map((c) => c.toLowerCase());
         const NUMBERS = [...Array(10).keys()];
-        // prettier-ignore
-        const CHAR_LIST = [...ALPHABET_LOWER, ...ALPHABET_UPPER, ...NUMBERS, "&","é", '"', "'", "(", "-", "è","_","ç","à",")","=","~","#","{","[","|","`","\\","^","@","]","}",",",";",":","!","?",".","/","§"];
+        const CHAR_LIST = [
+            ...ALPHABET_LOWER,
+            ...ALPHABET_UPPER,
+            ...NUMBERS,
+            "&",
+            "é",
+            '"',
+            "'",
+            "(",
+            "-",
+            "è",
+            "_",
+            "ç",
+            "à",
+            ")",
+            "=",
+            "~",
+            "#",
+            "{",
+            "[",
+            "|",
+            "`",
+            "\\",
+            "^",
+            "@",
+            "]",
+            "}",
+            ",",
+            ";",
+            ":",
+            "!",
+            "?",
+            ".",
+            "/",
+            "§",
+        ].map(encodeURIComponent);
 
         let baseUrl =
             "https://web-client-ch56.challenge01.root-me.org:58056/notes/";
